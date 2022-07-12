@@ -11,7 +11,14 @@ config_version=4
 [application]
 
 config/name="Shapeshooter"
+config/description="2D Game where you shoot other shapes as a shape and try not to die
+"
+run/main_scene="res://src/actors/Player.tscn"
 config/icon="res://icon.png"
+
+[display]
+
+window/stretch/mode="2d"
 
 [physics]
 
