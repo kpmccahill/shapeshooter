@@ -13,7 +13,7 @@ config_version=4
 config/name="Shapeshooter"
 config/description="2D Game where you shoot other shapes as a shape and try not to die
 "
-run/main_scene="res://src/Arena.tscn"
+run/main_scene="res://src/Main.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -41,6 +41,11 @@ move_up={
 move_down={
 "deadzone": 0.5,
 "events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":83,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
+ ]
+}
+boost={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":16777237,"physical_scancode":0,"unicode":0,"echo":false,"script":null)
  ]
 }
 
