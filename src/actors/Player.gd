@@ -5,24 +5,31 @@ var win_size  # Initialized on _ready
 
 export var speed: int = 250
 
-# Boost stuff, wanna move this but don't know where
-var boost: float
-export var boost_max: float
-export var boost_modifier: int
-export var boost_regen_rate: float # Rate that boost regens
-export var boost_deplete_rate: float # Rate that boost depletes
+# Health stuff
+export var max_health: int = 5
+export var health: int = max_health
 
-var boost_depleted: bool
-var boost_cooldown: int
-export var boost_cooldown_max: int # Cooldown is in frames, so 300 frames @ 60fps should be around 5s
+# Boost stuff, wanna move this but don't know where
+export var boost_max: float = 100
+export var boost: float = boost_max
+export var boost_modifier: int = 2
+export var boost_regen_rate: float = 0.5 # Rate that boost regens
+export var boost_deplete_rate: float = 2.0 # Rate that boost depletes
+
+export var boost_cooldown_max: int = 300 # Cooldown is in frames, so 300 frames @ 60fps should be around 5s
+var boost_depleted: bool = false
+var boost_cooldown: int = boost_cooldown_max
+
+signal boost_empty
 
 # increases the players velocity by the boost_modifier
 func use_boost(velocity: Vector2) -> Vector2:
         if not boost_depleted:
                 velocity = velocity * boost_modifier
-                boost = floor(abs(boost - boost_deplete_rate))
+                boost = abs(floor(boost - boost_deplete_rate))
                 if boost == 0:
                         boost_depleted = true
+                        emit_signal("boost_empty")
         return velocity
 
 # regenerates boost after the cooldown
@@ -33,25 +40,15 @@ func regen_boost() -> void:
                         boost_cooldown = boost_cooldown_max
                         boost_depleted = false
                         boost += boost_regen_rate
-        elif boost < 100:
+        elif boost < boost_max:
                         boost += boost_regen_rate
-
-func _init() -> void:
-        boost_max = 100
-        boost_modifier = 2
-        boost_regen_rate = 0.5
-        boost_deplete_rate = 1.5
-
-        boost_depleted = false
-        boost_cooldown_max = 300 # Cooldown is in frames, so 300 frames @ 60fps should be around 5s
-        boost_cooldown = boost_cooldown_max
+        elif boost > boost_max:
+                        boost = boost_max
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
     win_size = get_viewport_rect().size # Get a Vec2 containing the widow dimensions
     position = win_size / 2 # Position the player at the center of the screen
-
-    boost = boost_max
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -69,14 +66,9 @@ func _process(delta):
         if velocity.length() > 0:
                 velocity = velocity.normalized() * speed
         
-        print(boost_cooldown)
-
-        print("Boost: ", boost)
         if Input.is_action_pressed("boost"):
                 velocity = use_boost(velocity)
         regen_boost()
-
-        print("Velocity: ", velocity.length())
 
         position += velocity * delta
         position.x = clamp(position.x, 0, win_size.x)
