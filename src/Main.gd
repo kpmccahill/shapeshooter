@@ -1,6 +1,7 @@
+# Main scene, connect everything together.
 extends Node2D
 
-onready var hud = get_node("root")
+onready var hud = get_node("hud")
 onready var player = get_node("Player")
 
 # Called when the node enters the scene tree for the first time.

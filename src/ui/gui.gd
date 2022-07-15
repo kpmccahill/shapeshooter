@@ -3,7 +3,7 @@ extends CanvasLayer
 
 # Updates the passed in node if it is a resource meter
 func update_resource_meter(element: TextureProgress, value) -> void:
-                element.value = value
+        element.value = value
 
 # Updates the passed in node if it is a label
 func update_text_element(element: Label, value) -> void:

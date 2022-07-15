@@ -10,11 +10,13 @@ export var max_health: int = 5
 var health: int = max_health
 
 # Boost stuff, wanna move this but don't know where
-export var boost_max := 100
+export var boost_max := 500.0
 export var boost_modifier: int = 2
-export var boost_regen_rate := 1 # Rate that boost regens
-export var boost_deplete_rate: int = 2 # Rate that boost depletes
-var boost: float = boost_max
+export var boost_regen_rate := 1.5 # Rate that boost regens
+export var boost_deplete_rate := 5.0 # Rate that boost depletes
+var boost: float = boost_max setget ,boost_as_pct_get
+
+const cooldown_threshold := 4.5
 
 # Cooldown stuff
 export var boost_cooldown_max: int = 300 # Cooldown is in frames, so 300 frames @ 60fps should be around 5s
@@ -27,11 +29,15 @@ var boost_state = BoostState.REGEN
 signal boost_cooldown
 signal boost_regen
 
+# Returns the boost as a percentage of the max value
+func boost_as_pct_get() -> float:
+        return (boost / boost_max) * 100
+
 # increases the players velocity by the boost_modifier
 func use_boost(velocity: Vector2) -> Vector2:
         velocity = velocity * boost_modifier
         boost = abs(boost - boost_deplete_rate)
-        if boost == 0:
+        if boost < cooldown_threshold:
                 boost_state = BoostState.COOLDOWN
                 $BoostCooldown.start()
                 emit_signal("boost_cooldown")
