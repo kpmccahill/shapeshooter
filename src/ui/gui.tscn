@@ -25,3 +25,9 @@ value = 100.0
 texture_under = ExtResource( 2 )
 texture_progress = ExtResource( 1 )
 tint_progress = Color( 0.0862745, 0.658824, 0.376471, 1 )
+
+[node name="BoostCooldown" type="Label" parent="."]
+margin_left = 110.0
+margin_top = 82.0
+margin_right = 130.0
+margin_bottom = 102.0
