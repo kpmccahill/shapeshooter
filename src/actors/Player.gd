@@ -1,95 +1,52 @@
-# The Player Character
-extends Area2D
+extends KinematicBody2D
 
-var win_size  # Initialized on _ready
+export var speed: int = 500
+var velocity = Vector2.ZERO
 
-export var speed: int = 250
+onready var _player_sprite = $AnimatedSprite
+onready var _idle_timer = $IdleTimer
 
-# Health stuff
-export var max_health: int = 5
-var health: int = max_health
+# applies animated sprite to the character. takes in _input_vector but does
+# not use it yet.
+func _apply_animation(_input_vector: Vector2):
+	# print(input_vector.length())
 
-# Boost stuff, wanna move this but don't know where
-export var boost_max := 500.0
-export var boost_modifier: int = 2
-export var boost_regen_rate := 1.5 # Rate that boost regens
-export var boost_deplete_rate := 5.0 # Rate that boost depletes
-var boost: float = boost_max setget ,boost_as_pct_get
+	# applies the horizontal movement sprite before the vertical, so moving
+	# in a diagonal direction uses the l/r sprite rather than u/d
+	# TODO: fix this. Add a diagonal sprite?
+	if Input.is_action_pressed("move_right"):
+		_player_sprite.play("move_right")
+		_idle_timer.start()
+	elif Input.is_action_pressed("move_left"):
+		_player_sprite.play("move_left")
+		_idle_timer.start()
+	elif Input.is_action_pressed("move_down"):
+		_player_sprite.play("move_down")
+		_idle_timer.start()
+	elif Input.is_action_pressed("move_up"):
+		_player_sprite.play("move_up")
+		_idle_timer.start()
+		
 
-const cooldown_threshold := 4.5
 
-# Cooldown stuff
-export var boost_cooldown_max: int = 300 # Cooldown is in frames, so 300 frames @ 60fps should be around 5s
-var boost_cooldown: int = boost_cooldown_max
-
-# State for the boost
-enum BoostState {REGEN, COOLDOWN}
-var boost_state = BoostState.REGEN
-
-signal boost_cooldown
-signal boost_regen
-
-# Returns the boost as a percentage of the max value
-func boost_as_pct_get() -> float:
-        return (boost / boost_max) * 100
-
-# increases the players velocity by the boost_modifier
-func use_boost(velocity: Vector2) -> Vector2:
-        velocity = velocity * boost_modifier
-        boost = abs(boost - boost_deplete_rate)
-        if boost < cooldown_threshold:
-                boost_state = BoostState.COOLDOWN
-                $BoostCooldown.start()
-                emit_signal("boost_cooldown")
-        return velocity
-
-# regenerates boost
-func regen_boost() -> void:
-        if boost < boost_max:
-                boost += boost_regen_rate
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-    win_size = get_viewport_rect().size # Get a Vec2 containing the widow dimensions
-    position = win_size / 2 # Position the player at the center of the screen
-    $BoostCooldown.set_wait_time(boost_cooldown_max / 60)
-    $BoostCooldown.set_one_shot(true)
+	_player_sprite.play("idle")
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-        var velocity = Vector2.ZERO
-        if Input.is_action_pressed("move_right"):
-                velocity.x += 1
-        if Input.is_action_pressed("move_left"):
-                velocity.x -= 1
-        if Input.is_action_pressed("move_down"):
-                velocity.y += 1
-        if Input.is_action_pressed("move_up"):
-                velocity.y -= 1
-                
-        # Normalize so that moving diagonally is not faster
-        if velocity.length() > 0:
-                velocity = velocity.normalized() * speed
-        
-        if Input.is_action_pressed("boost"):
-                if boost_state != BoostState.COOLDOWN:
-                        velocity = use_boost(velocity)
+func _physics_process(delta):
 
-        if boost_state == BoostState.REGEN:
-                regen_boost()
-        
-        print("boost: ", boost)
-        print("timer: ", $BoostCooldown.time_left)
-        position += velocity * delta
-        position.x = clamp(position.x, 0, win_size.x)
-        position.y = clamp(position.y, 0, win_size.y)
 
-# Switches to COOLDOWN state when the boost is empty
-func _on_Area2D_boost_cooldown():
-        boost_state = BoostState.COOLDOWN
-        yield($BoostCooldown, "timeout")
+	var input_vector = Vector2.ZERO
+	input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	input_vector.y = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 
-# Switches back to REGEN state
-func _on_BoostCooldown_timeout():
-        boost_state = BoostState.REGEN
-        emit_signal("boost_regen")
+	input_vector = input_vector.normalized()
+	_apply_animation(input_vector)
+
+	velocity += input_vector * speed * delta
+	velocity = move_and_slide(velocity, Vector2.ZERO)
+	velocity = lerp(velocity, Vector2.ZERO, .1)
+	print(velocity)
+
+
+func _on_IdleTimer_timeout():
+	_player_sprite.play("idle")
