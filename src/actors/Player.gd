@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-export var speed: int = 500
+export var speed: int = 750
 var velocity = Vector2.ZERO
 
 onready var _player_sprite = $AnimatedSprite
