@@ -2,10 +2,11 @@
 extends Node2D
 
 
-export var damage := 10
+export var damage := 50
 
 onready var _timer = $AliveTimer
 onready var _animation_player = $AnimationPlayer
+onready var _hitbox = $Sprite/Hitbox
 
 # projectile movement vars
 var velocity = Vector2.ONE
@@ -23,6 +24,8 @@ func _ready():
 
 	# apply speed to velocity, direction comes from player (defaults down and right)
 	velocity = speed * velocity
+
+	_hitbox.damage = damage
 
 func _process(delta):
 	position += velocity * delta 

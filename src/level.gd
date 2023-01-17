@@ -12,6 +12,6 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	print(get_children())
-	# pass
+func _process(_delta):
+	# print(get_children())
+	pass
