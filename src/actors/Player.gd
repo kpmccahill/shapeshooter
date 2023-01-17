@@ -31,9 +31,9 @@ func _apply_animation(_input_vector: Vector2):
 		_player_sprite.play("move_up")
 		_idle_timer.start()
 		
-func _fire_projectile(delta):
+
+func _fire_projectile():
 	var instanced_projectile = _projectile.instance()
-	var projectile_speed = 700
 
 	var mouse_pos = get_local_mouse_position()
 	mouse_pos = mouse_pos.normalized()
@@ -43,10 +43,9 @@ func _fire_projectile(delta):
 	var offset = Vector2(offset_value, offset_value)
 
 	instanced_projectile.position = position + (offset * mouse_pos)
-	instanced_projectile.velocity = mouse_pos * projectile_speed
-
+	instanced_projectile.velocity = mouse_pos * instanced_projectile.velocity
+	# need to multiply the velocity by the normalized mouse pos to get direction of travel
 	owner.add_child(instanced_projectile)
-
 
 
 func _ready():
@@ -66,7 +65,7 @@ func _physics_process(delta):
 	print(velocity)
 
 	if Input.is_action_just_pressed("shoot_projectile"):
-		_fire_projectile(delta)
+		_fire_projectile()
 
 func _on_IdleTimer_timeout():
 	_player_sprite.play("idle")

@@ -1,20 +1,48 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/characters/square_projectile.png" type="Texture" id=1]
 [ext_resource path="res://src/particles/square_projectile.gd" type="Script" id=2]
 [ext_resource path="res://src/hitbox.gd" type="Script" id=3]
 
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
 [sub_resource type="Animation" id=3]
 resource_name = "spin"
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 36, -0.25, 0, 0.25, 0, 72, -0.25, 0, 0.25, 0, 108, -0.25, 0, 0.25, 0, 144, -0.25, 0, 0.25, 0, 180, -0.25, 0, 0.25, 0, 216, -0.25, 0, 0.25, 0, 252, -0.25, 0, 0.25, 0, 288, -0.25, 0, 0.25, 0, 324, -0.25, 0, 0.25, 0, 360, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1 )
+}
 
 [sub_resource type="RectangleShape2D" id=4]
 
 [node name="square_projectile" type="Node2D"]
 position = Vector2( 66, 10 )
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 damage = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 5 )
 anims/spin = SubResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="."]
