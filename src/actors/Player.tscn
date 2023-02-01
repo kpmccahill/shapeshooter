@@ -74,7 +74,11 @@ animations = [ {
 } ]
 
 [node name="player" type="KinematicBody2D"]
+collision_layer = 5
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 1.45, 1.45 )

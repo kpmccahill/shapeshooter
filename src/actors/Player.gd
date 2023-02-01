@@ -72,6 +72,7 @@ func _physics_process(delta):
 
 	if Input.is_action_just_pressed("shoot_projectile"):
 		_fire_projectile()
+	
 
 func _on_IdleTimer_timeout():
 	_player_sprite.play("idle")

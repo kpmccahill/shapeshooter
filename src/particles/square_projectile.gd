@@ -2,7 +2,7 @@
 extends Node2D
 
 
-export var damage := 50
+export var damage := 25
 
 onready var _timer = $AliveTimer
 onready var _animation_player = $AnimationPlayer
@@ -25,10 +25,18 @@ func _ready():
 	# apply speed to velocity, direction comes from player (defaults down and right)
 	velocity = speed * velocity
 
+	# override the default damage for hitboxes
 	_hitbox.damage = damage
 
 func _process(delta):
-	position += velocity * delta 
+	position += velocity * delta
+
 
 func _on_AliveTimer_timeout():
+	queue_free()
+
+func _on_Hitbox_body_entered(_body:Node):
+	queue_free()
+
+func _on_Hitbox_area_entered(_area:Area2D):
 	queue_free()
