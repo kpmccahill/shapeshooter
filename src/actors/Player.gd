@@ -1,14 +1,14 @@
 extends KinematicBody2D
 
 # movement vars
-export var speed: int = 750
+export var speed: int = 1500
 var velocity = Vector2.ZERO
-
-# health 
 
 onready var _player_sprite = $AnimatedSprite
 onready var _idle_timer = $IdleTimer
-onready var _projectile = preload("res://src/particles/square_projectile.tscn")
+
+# projectile
+export(PackedScene) var _projectile
 
 # applies animated sprite to the character. takes in _input_vector but does
 # not use it yet.

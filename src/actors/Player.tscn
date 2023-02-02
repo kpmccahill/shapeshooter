@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://src/actors/player.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/player_square.png" type="Texture" id=2]
+[ext_resource path="res://src/particles/square_projectile.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -79,6 +80,7 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+_projectile = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2( 1.45, 1.45 )

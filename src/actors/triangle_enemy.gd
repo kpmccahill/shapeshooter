@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 var health := 100
 
-var speed = 1000
+var speed = 500
 var velocity = Vector2.ZERO
 var target = null
 
