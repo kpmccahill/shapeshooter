@@ -6,6 +6,8 @@ var speed = 500
 var velocity = Vector2.ZERO
 var target = null
 
+signal death
+
 func take_damage(amount: int):
 	health -= amount
 
@@ -13,6 +15,7 @@ func take_damage(amount: int):
 func _process(delta):
 	var movement_direction = Vector2()
 	if health <= 0:
+		emit_signal("death")
 		queue_free()
 
 	if target:

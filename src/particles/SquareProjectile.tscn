@@ -33,7 +33,7 @@ tracks/0/keys = {
 
 [sub_resource type="RectangleShape2D" id=4]
 
-[node name="square_projectile" type="Node2D"]
+[node name="SquareProjectile" type="Node2D"]
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
