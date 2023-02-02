@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://assets/characters/enemy_triangle.png" type="Texture" id=1]
-[ext_resource path="res://src/hurtbox.gd" type="Script" id=2]
-[ext_resource path="res://src/actors/triangle_enemy.gd" type="Script" id=3]
+[ext_resource path="res://src/Hurtbox.gd" type="Script" id=2]
+[ext_resource path="res://src/actors/TriangleEnemy.gd" type="Script" id=3]
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )

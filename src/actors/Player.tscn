@@ -1,8 +1,8 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://src/actors/player.gd" type="Script" id=1]
+[ext_resource path="res://src/actors/Player.gd" type="Script" id=1]
 [ext_resource path="res://assets/characters/player_square.png" type="Texture" id=2]
-[ext_resource path="res://src/particles/square_projectile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/particles/SquareProjectile.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -74,7 +74,7 @@ animations = [ {
 "speed": 3.0
 } ]
 
-[node name="player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D"]
 collision_layer = 5
 script = ExtResource( 1 )
 __meta__ = {
@@ -95,8 +95,15 @@ playing = true
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
 zoom = Vector2( 0.5, 0.5 )
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
 smoothing_enabled = true
 smoothing_speed = 2.0
+drag_margin_left = 0.1
+drag_margin_top = 0.1
+drag_margin_right = 0.1
+drag_margin_bottom = 0.1
+editor_draw_drag_margin = true
 
 [node name="IdleTimer" type="Timer" parent="."]
 wait_time = 2.0

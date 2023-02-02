@@ -12,12 +12,12 @@ _global_script_classes=[ {
 "base": "Area2D",
 "class": "Hitbox",
 "language": "GDScript",
-"path": "res://src/hitbox.gd"
+"path": "res://src/Hitbox.gd"
 }, {
 "base": "Area2D",
 "class": "Hurtbox",
 "language": "GDScript",
-"path": "res://src/hurtbox.gd"
+"path": "res://src/Hurtbox.gd"
 } ]
 _global_script_class_icons={
 "Hitbox": "",
@@ -29,7 +29,7 @@ _global_script_class_icons={
 config/name="Shapeshooter"
 config/description="2D Game where you shoot other shapes as a shape and try not to die
 "
-run/main_scene="res://src/level.tscn"
+run/main_scene="res://src/Main.tscn"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
 config/icon="res://icon.png"
 

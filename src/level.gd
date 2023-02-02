@@ -2,18 +2,20 @@ extends Node2D
 
 export(PackedScene) var triangle_scene
 
-onready var _player: KinematicBody2D = $player
+onready var _player: KinematicBody2D = $Player
 onready var _tilemap = $TileMap
 onready var _spawn_path = $Path2D
+# onready var camera = $Camera2D
 
-var map_x = 20
-var map_y = 20
+var map_x = 24
+var map_y = 24
 var map_size = Vector2(map_x, map_y) # size in number of cells
 
 func create_triangle():
 	var location = $Path2D/PathFollow2D
 	location.offset = randi()
-	print(location.offset)
+	# print(location.offset)
+
 	var spawned_enemy = triangle_scene.instance()
 	spawned_enemy.position = location.position
 	add_child(spawned_enemy)
@@ -22,8 +24,8 @@ func create_triangle():
 func spawn_triangle():
 	randomize()
 	var chance = randi() % 10
-	print(chance)
-	if chance < 7:
+	# print(chance)
+	if chance < 8:
 		if chance > 4:
 			create_triangle()
 			create_triangle()
@@ -60,6 +62,8 @@ func _draw_map():
 			
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# camera.current = true
+	# camera.position = (map_size * 32) / 2
 	_draw_map()
 	_player.position = (map_size * 32) / 2 # move player to center of map
 	$EnemySpawnTimer.start()

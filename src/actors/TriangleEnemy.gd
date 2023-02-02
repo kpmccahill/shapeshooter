@@ -23,5 +23,5 @@ func _process(delta):
 	velocity = move_and_slide(velocity, Vector2.ZERO)
 
 func _on_PlayerDetection_body_entered(body: Node):
-	if body.name == "player":
+	if body.name == "Player":
 		target = body

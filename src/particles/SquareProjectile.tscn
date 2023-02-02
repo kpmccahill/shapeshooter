@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/characters/square_projectile.png" type="Texture" id=1]
-[ext_resource path="res://src/particles/square_projectile.gd" type="Script" id=2]
-[ext_resource path="res://src/hitbox.gd" type="Script" id=3]
+[ext_resource path="res://src/particles/SquareProjectile.gd" type="Script" id=2]
+[ext_resource path="res://src/Hitbox.gd" type="Script" id=3]
 
 [sub_resource type="Animation" id=5]
 length = 0.001
