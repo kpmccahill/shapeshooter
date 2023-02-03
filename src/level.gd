@@ -5,6 +5,9 @@ export(PackedScene) var triangle_scene
 onready var _player: KinematicBody2D = $Player
 onready var _tilemap = $TileMap
 onready var _spawn_path = $Path2D
+onready var _map_area2d = $MapExtents
+onready var _map_collision_size = $MapExtents/CollisionShape2D
+
 # onready var camera = $Camera2D
 
 var map_x = 24
@@ -66,6 +69,9 @@ func _ready():
 	# camera.position = (map_size * 32) / 2
 	_draw_map()
 	_player.position = (map_size * 32) / 2 # move player to center of map
+	_map_collision_size.shape.extents = Vector2(map_x * 16, map_y * 16)
+	_map_area2d.position = (map_size * 32) / 2
+	print(_map_collision_size.shape.extents)
 	$EnemySpawnTimer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

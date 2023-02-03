@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+export var health := 100
+
 # movement vars
 export var speed: int = 1500
 var velocity = Vector2.ZERO
@@ -9,6 +11,13 @@ onready var _idle_timer = $IdleTimer
 
 # projectile
 export(PackedScene) var _projectile
+signal player_death
+
+func take_damage(damage: int):
+	health -= damage
+	if health < 1:
+		emit_signal("player_death")
+
 
 # applies animated sprite to the character. takes in _input_vector but does
 # not use it yet.
@@ -53,6 +62,13 @@ func _fire_projectile():
 
 func _ready():
 	_player_sprite.play("idle")
+
+func _process(_delta):
+	pass
+	# # print(health)
+	# # if player dies
+	# if health < 1:
+	# 	emit_signal("player_death")
 
 func _physics_process(delta):
 	var input_vector = Vector2.ZERO

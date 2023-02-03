@@ -10,6 +10,16 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Area2D",
+"class": "EnemyHitbox",
+"language": "GDScript",
+"path": "res://src/EnemyHitbox.gd"
+}, {
+"base": "Area2D",
+"class": "EnemyHurtbox",
+"language": "GDScript",
+"path": "res://src/EnemyHurtbox.gd"
+}, {
+"base": "Area2D",
 "class": "Hitbox",
 "language": "GDScript",
 "path": "res://src/Hitbox.gd"
@@ -20,6 +30,8 @@ _global_script_classes=[ {
 "path": "res://src/Hurtbox.gd"
 } ]
 _global_script_class_icons={
+"EnemyHitbox": "",
+"EnemyHurtbox": "",
 "Hitbox": "",
 "Hurtbox": ""
 }

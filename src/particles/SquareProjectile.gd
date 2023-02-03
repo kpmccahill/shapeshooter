@@ -15,7 +15,7 @@ export var speed = 700
 func _ready():
 
 	# start timer to despawn the projectile
-	_timer.wait_time = 2
+	_timer.wait_time = .5
 	_timer.start()
 
 	# start the spinning animation
@@ -31,12 +31,9 @@ func _ready():
 func _process(delta):
 	position += velocity * delta
 
-
 func _on_AliveTimer_timeout():
 	queue_free()
 
-func _on_Hitbox_body_entered(_body:Node):
-	queue_free()
-
-func _on_Hitbox_area_entered(_area:Area2D):
-	queue_free()
+func _on_Hitbox_area_entered(area: Area2D):
+	if area.name != "Hurtbox":
+		queue_free()

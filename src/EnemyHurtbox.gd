@@ -1,4 +1,4 @@
-class_name Hurtbox
+class_name EnemyHurtbox
 extends Area2D
 
 func _init():
@@ -8,7 +8,7 @@ func _init():
 func _ready() -> void:
 	var _temp = connect("area_entered", self, "_on_area_entered")
 
-func _on_area_entered(hitbox: EnemyHitbox) -> void:
+func _on_area_entered(hitbox: Hitbox) -> void:
 	if hitbox == null:
 		return
 
