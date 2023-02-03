@@ -28,15 +28,27 @@ func create_triangle():
 
 # spawns enemy triangle(s)
 func spawn_triangle():
+	var count = 0
+	var children = get_children()
+	var regex = RegEx.new()
+	regex.compile("TriangleEnemy")
+	for child in children:
+		var result = regex.search(child.name)
+		if result:
+			count += 1
+	
+	print(count)
 	randomize()
 	var chance = randi() % 10
 	# print(chance)
-	if chance < 8:
+	if chance < 8 and count <= 6:
 		if chance > 4:
 			create_triangle()
 			create_triangle()
 		else:
 			create_triangle()
+		$EnemySpawnTimer.stop()
+		$SpawnCooldownTimer.start()
 
 # draws the map and borders according to map_x and map_y
 func _draw_map():
@@ -74,7 +86,7 @@ func _ready():
 	# camera.current = true
 	# camera.position = (map_size * 32) / 2
 	new_level()
-
+	
 func _on_EnemySpawnTimer_timeout():
 	spawn_triangle()
 
@@ -89,10 +101,13 @@ func new_level():
 
 func clear_level():
 	$EnemySpawnTimer.stop()
+	$SpawnCooldownTimer.stop()
 	var regex = RegEx.new()
 	regex.compile("TriangleEnemy")
 	for n in get_children():
 		var result = regex.search(n.name)
 		if result:
 			n.queue_free()
-		
+
+func _on_SpawnCooldownTimer_timeout():
+	$EnemySpawnTimer.start()

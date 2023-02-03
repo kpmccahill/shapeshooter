@@ -25,7 +25,7 @@ func _process(_delta: float):
 		get_tree().quit()
 	
 	health_bar.value = level.find_node("Player").health
-	print($ResetTimer.time_left)
+	# print($ResetTimer.time_left)
 
 	if not $ResetTimer.is_stopped():
 		reset_label.text = "Level reset in: " + String(int($ResetTimer.time_left))

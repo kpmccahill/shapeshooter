@@ -107,9 +107,6 @@ curve = SubResource( 5 )
 
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 
-[node name="EnemySpawnTimer" type="Timer" parent="."]
-wait_time = 4.0
-
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="MapExtents" type="Area2D" parent="."]
@@ -117,4 +114,11 @@ wait_time = 4.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapExtents"]
 shape = SubResource( 6 )
 
+[node name="EnemySpawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="SpawnCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_EnemySpawnTimer_timeout"]
+[connection signal="timeout" from="SpawnCooldownTimer" to="." method="_on_SpawnCooldownTimer_timeout"]
