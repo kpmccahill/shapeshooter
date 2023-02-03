@@ -15,7 +15,7 @@ export var speed = 700
 func _ready():
 
 	# start timer to despawn the projectile
-	_timer.wait_time = .5
+	_timer.wait_time = .7
 	_timer.start()
 
 	# start the spinning animation

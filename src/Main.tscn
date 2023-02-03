@@ -30,19 +30,17 @@ script = ExtResource( 2 )
 
 [node name="Score" type="Label" parent="HUD"]
 anchor_left = 0.5
-anchor_top = 0.1
+anchor_top = 0.15
 anchor_right = 0.5
-anchor_bottom = 0.1
-margin_right = 120.0
-margin_bottom = 120.0
+anchor_bottom = 0.15
+margin_bottom = 172.0
+grow_horizontal = 2
 
 [node name="HealthBar" type="ProgressBar" parent="HUD"]
 anchor_left = 0.015
-anchor_top = 0.95
-anchor_right = 0.015
+anchor_top = 0.9
+anchor_right = 0.2
 anchor_bottom = 0.95
-margin_top = -64.0
-margin_right = 400.0
 theme = SubResource( 1 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_styles/fg = SubResource( 3 )
@@ -50,4 +48,18 @@ custom_styles/bg = SubResource( 2 )
 value = 50.0
 percent_visible = false
 
-[connection signal="child_exiting_tree" from="Level" to="." method="_on_Level_child_exiting_tree"]
+[node name="ResetTimer" type="Label" parent="HUD"]
+anchor_left = 0.5
+anchor_top = 0.2
+anchor_right = 0.5
+anchor_bottom = 0.2
+margin_left = -10.0
+margin_right = 10.0
+margin_bottom = 64.0
+grow_horizontal = 2
+
+[node name="ResetTimer" type="Timer" parent="."]
+wait_time = 6.0
+one_shot = true
+
+[connection signal="timeout" from="ResetTimer" to="." method="_on_ResetTimer_timeout"]

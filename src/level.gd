@@ -8,6 +8,8 @@ onready var _spawn_path = $Path2D
 onready var _map_area2d = $MapExtents
 onready var _map_collision_size = $MapExtents/CollisionShape2D
 
+
+signal enemy_death
 # onready var camera = $Camera2D
 
 var map_x = 24
@@ -21,6 +23,7 @@ func create_triangle():
 
 	var spawned_enemy = triangle_scene.instance()
 	spawned_enemy.position = location.position
+	spawned_enemy.connect("death", self, "_on_Enemy_death")
 	add_child(spawned_enemy)
 
 # spawns enemy triangle(s)
@@ -62,23 +65,34 @@ func _draw_map():
 	_spawn_path.curve.add_point(Vector2(max_x, max_y))
 	_spawn_path.curve.add_point(Vector2(min_x, max_y))
 	_spawn_path.curve.add_point(Vector2(min_x, min_y))
+
+	_map_collision_size.shape.extents = Vector2(map_x * 16, map_y * 16)
+	_map_area2d.position = (map_size * 32) / 2
 			
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	# camera.current = true
 	# camera.position = (map_size * 32) / 2
-	_draw_map()
-	_player.position = (map_size * 32) / 2 # move player to center of map
-	_map_collision_size.shape.extents = Vector2(map_x * 16, map_y * 16)
-	_map_area2d.position = (map_size * 32) / 2
-	print(_map_collision_size.shape.extents)
-	$EnemySpawnTimer.start()
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	# print(get_children())
-	pass
-
+	new_level()
 
 func _on_EnemySpawnTimer_timeout():
 	spawn_triangle()
+
+func _on_Enemy_death():
+	emit_signal("enemy_death")
+
+func new_level():
+	_draw_map()
+	_player.position = (map_size * 32) / 2
+	_player.health = 100
+	$EnemySpawnTimer.start()
+
+func clear_level():
+	$EnemySpawnTimer.stop()
+	var regex = RegEx.new()
+	regex.compile("TriangleEnemy")
+	for n in get_children():
+		var result = regex.search(n.name)
+		if result:
+			n.queue_free()
+		
