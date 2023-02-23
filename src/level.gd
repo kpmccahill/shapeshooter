@@ -10,7 +10,8 @@ onready var _map_collision_size = $MapExtents/CollisionShape2D
 
 
 signal enemy_death
-# onready var camera = $Camera2D
+signal new_game
+onready var camera = $Camera2D
 
 var map_x = 24
 var map_y = 24
@@ -83,8 +84,8 @@ func _draw_map():
 			
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# camera.current = true
-	# camera.position = (map_size * 32) / 2
+	camera.current = true
+	camera.position = (map_size * 32) / 2
 	new_level()
 	
 func _on_EnemySpawnTimer_timeout():
@@ -94,6 +95,7 @@ func _on_Enemy_death():
 	emit_signal("enemy_death")
 
 func new_level():
+	emit_signal("new_game")
 	_draw_map()
 	_player.position = (map_size * 32) / 2
 	_player.health = 100

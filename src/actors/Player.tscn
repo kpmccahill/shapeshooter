@@ -97,7 +97,6 @@ frame = 1
 playing = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
-current = true
 zoom = Vector2( 0.65, 0.65 )
 drag_margin_h_enabled = true
 drag_margin_v_enabled = true

@@ -108,6 +108,8 @@ curve = SubResource( 5 )
 [node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.75, 0.75 )
 
 [node name="MapExtents" type="Area2D" parent="."]
 

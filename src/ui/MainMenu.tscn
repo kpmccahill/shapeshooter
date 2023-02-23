@@ -1,0 +1,71 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://src/animations/square_title.tres" type="Texture" id=1]
+[ext_resource path="res://src/ui/MainMenu.gd" type="Script" id=2]
+
+[node name="MainMenu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 2 )
+
+[node name="MenuVBoxContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -160.0
+margin_top = -300.0
+margin_right = 160.0
+margin_bottom = 300.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 65
+alignment = 1
+
+[node name="TitleVBoxContainer" type="VBoxContainer" parent="MenuVBoxContainer"]
+margin_top = 26.0
+margin_right = 320.0
+margin_bottom = 286.0
+
+[node name="TitleAnimation" type="TextureRect" parent="MenuVBoxContainer/TitleVBoxContainer"]
+margin_right = 320.0
+margin_bottom = 192.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource( 1 )
+stretch_mode = 4
+
+[node name="TitleLabel" type="Label" parent="MenuVBoxContainer/TitleVBoxContainer"]
+margin_top = 196.0
+margin_right = 320.0
+margin_bottom = 260.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Shapeshooter"
+align = 1
+
+[node name="ButtonVBoxContainer" type="VBoxContainer" parent="MenuVBoxContainer"]
+margin_top = 351.0
+margin_right = 320.0
+margin_bottom = 573.0
+custom_constants/separation = 6
+
+[node name="PlayButtton" type="Button" parent="MenuVBoxContainer/ButtonVBoxContainer"]
+margin_right = 320.0
+margin_bottom = 70.0
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="MenuVBoxContainer/ButtonVBoxContainer"]
+margin_top = 76.0
+margin_right = 320.0
+margin_bottom = 146.0
+text = "Options"
+
+[node name="QuitButton" type="Button" parent="MenuVBoxContainer/ButtonVBoxContainer"]
+margin_top = 152.0
+margin_right = 320.0
+margin_bottom = 222.0
+text = "Quit"
+
+[connection signal="pressed" from="MenuVBoxContainer/ButtonVBoxContainer/PlayButtton" to="." method="_on_PlayButtton_pressed"]
+[connection signal="pressed" from="MenuVBoxContainer/ButtonVBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
