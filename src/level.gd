@@ -38,9 +38,11 @@ func spawn_triangle():
 		if result:
 			count += 1
 	
-	print(count)
+	print("Enemies on screen: " + count)
 	randomize()
 	var chance = randi() % 10
+
+	# TODO: Fix spawning near player. (dont spawn near player)
 	# print(chance)
 	if chance < 8 and count <= 6:
 		if chance > 4:
