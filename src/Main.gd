@@ -24,7 +24,7 @@ func _process(_delta: float):
 	# quits the game on escape
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().paused = !get_tree().paused
-		pause_menu.show()
+		pause_menu.visible = !pause_menu.visible
 		
 	health_bar.value = level.find_node("Player").health
 
@@ -44,6 +44,7 @@ func _on_ResetOptions_restart_game():
 	reset_ui.hide()
 	hud.show()
 	score = 0
+	score_label.text = String(score)
 	level.new_level()
 
 # func _on_PauseMenu_resume_game():
