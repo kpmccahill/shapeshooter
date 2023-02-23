@@ -38,7 +38,7 @@ func spawn_triangle():
 		if result:
 			count += 1
 	
-	print("Enemies on screen: " + count)
+	print("Enemies on screen: " + String(count))
 	randomize()
 	var chance = randi() % 10
 
