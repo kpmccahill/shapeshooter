@@ -37,11 +37,11 @@ margin_right = 322.0
 margin_bottom = 70.0
 text = "Resume"
 
-[node name="ControlsButton" type="Button" parent="PauseMenuVBoxContainer/ButtonVBoxContainer"]
+[node name="OptionsButton" type="Button" parent="PauseMenuVBoxContainer/ButtonVBoxContainer"]
 margin_top = 74.0
 margin_right = 322.0
 margin_bottom = 144.0
-text = "Controls"
+text = "Options"
 
 [node name="QuitButton" type="Button" parent="PauseMenuVBoxContainer/ButtonVBoxContainer"]
 margin_top = 148.0

@@ -11,9 +11,12 @@ onready var _idle_timer = $IdleTimer
 
 # projectile
 export(PackedScene) var _projectile
+signal player_damaged
 signal player_death
+signal player_fired
 
 func take_damage(damage: int):
+	emit_signal("player_damaged")
 	health -= damage
 	if health < 1:
 		emit_signal("player_death")
@@ -58,6 +61,8 @@ func _fire_projectile():
 	
 	# MUST add this to the owner! otherwise position gets all fucky.
 	owner.add_child(instanced_projectile)
+
+	emit_signal("player_fired")
 
 
 func _ready():

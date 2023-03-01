@@ -8,7 +8,7 @@ onready var _spawn_path = $Path2D
 onready var _map_area2d = $MapExtents
 onready var _map_collision_size = $MapExtents/CollisionShape2D
 
-
+signal enemy_damaged
 signal enemy_death
 signal new_game
 onready var camera = $Camera2D
@@ -25,6 +25,7 @@ func create_triangle():
 	var spawned_enemy = triangle_scene.instance()
 	spawned_enemy.position = location.position
 	spawned_enemy.connect("death", self, "_on_Enemy_death")
+	spawned_enemy.connect("enemy_damaged", self, "_on_Enemy_damaged")
 	add_child(spawned_enemy)
 
 # spawns enemy triangle(s)
@@ -92,6 +93,9 @@ func _ready():
 	
 func _on_EnemySpawnTimer_timeout():
 	spawn_triangle()
+
+func _on_Enemy_damaged():
+	emit_signal("enemy_damaged")
 
 func _on_Enemy_death():
 	emit_signal("enemy_death")

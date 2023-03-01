@@ -12,9 +12,11 @@ var velocity = Vector2.ZERO
 var target = null
 
 export var damage := 20
+signal enemy_damaged
 signal death
 
 func take_damage(amount: int):
+	emit_signal("enemy_damaged")
 	health -= amount
 
 
