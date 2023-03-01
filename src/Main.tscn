@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://src/Level.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
 [ext_resource path="res://src/ui/ResetOptions.tscn" type="PackedScene" id=3]
 [ext_resource path="res://src/ui/PauseMenu.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/sounds/hurt_sound.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/sounds/player_fire_projectile.wav" type="AudioStream" id=6]
+[ext_resource path="res://assets/sounds/enemy_death_sound.wav" type="AudioStream" id=7]
+[ext_resource path="res://assets/sounds/enemy_hurt_sound.wav" type="AudioStream" id=8]
 
 [sub_resource type="Theme" id=1]
 
@@ -68,10 +71,17 @@ mouse_filter = 2
 wait_time = 6.0
 one_shot = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="PlayerHurtStream" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 
-[node name="ProjectileStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="EnemyHurtStream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+
+[node name="EnemyDeathStream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 7 )
+
+[node name="ProjectileStream" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
 
 [connection signal="restart_game" from="UI/ResetOptions" to="." method="_on_ResetOptions_restart_game"]
 [connection signal="gui_input" from="UI/PauseMenu" to="." method="_on_PauseMenu_gui_input"]
