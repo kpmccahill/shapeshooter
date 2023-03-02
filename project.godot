@@ -43,7 +43,7 @@ config/description="2D Game where you shoot other shapes as a shape and try not 
 "
 run/main_scene="res://src/ui/MainMenu.tscn"
 boot_splash/bg_color=Color( 0, 0, 0, 1 )
-config/icon="res://assets/tilemaps/thumnail.png"
+config/icon="res://assets/player_square.png"
 
 [display]
 
