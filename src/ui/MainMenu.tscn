@@ -23,9 +23,9 @@ custom_constants/separation = 65
 alignment = 1
 
 [node name="TitleVBoxContainer" type="VBoxContainer" parent="MenuVBoxContainer"]
-margin_top = 26.0
+margin_top = 64.0
 margin_right = 320.0
-margin_bottom = 286.0
+margin_bottom = 324.0
 
 [node name="TitleAnimation" type="TextureRect" parent="MenuVBoxContainer/TitleVBoxContainer"]
 margin_right = 320.0
@@ -45,9 +45,9 @@ text = "Shapeshooter"
 align = 1
 
 [node name="ButtonVBoxContainer" type="VBoxContainer" parent="MenuVBoxContainer"]
-margin_top = 351.0
+margin_top = 389.0
 margin_right = 320.0
-margin_bottom = 573.0
+margin_bottom = 535.0
 custom_constants/separation = 6
 
 [node name="PlayButtton" type="Button" parent="MenuVBoxContainer/ButtonVBoxContainer"]
@@ -55,16 +55,10 @@ margin_right = 320.0
 margin_bottom = 70.0
 text = "Play"
 
-[node name="OptionsButton" type="Button" parent="MenuVBoxContainer/ButtonVBoxContainer"]
+[node name="QuitButton" type="Button" parent="MenuVBoxContainer/ButtonVBoxContainer"]
 margin_top = 76.0
 margin_right = 320.0
 margin_bottom = 146.0
-text = "Options"
-
-[node name="QuitButton" type="Button" parent="MenuVBoxContainer/ButtonVBoxContainer"]
-margin_top = 152.0
-margin_right = 320.0
-margin_bottom = 222.0
 text = "Quit"
 
 [connection signal="pressed" from="MenuVBoxContainer/ButtonVBoxContainer/PlayButtton" to="." method="_on_PlayButtton_pressed"]

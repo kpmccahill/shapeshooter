@@ -30,23 +30,17 @@ align = 1
 [node name="ButtonVBoxContainer" type="VBoxContainer" parent="PauseMenuVBoxContainer"]
 margin_top = 68.0
 margin_right = 322.0
-margin_bottom = 286.0
+margin_bottom = 212.0
 
 [node name="ResumeButton" type="Button" parent="PauseMenuVBoxContainer/ButtonVBoxContainer"]
 margin_right = 322.0
 margin_bottom = 70.0
 text = "Resume"
 
-[node name="OptionsButton" type="Button" parent="PauseMenuVBoxContainer/ButtonVBoxContainer"]
+[node name="QuitButton" type="Button" parent="PauseMenuVBoxContainer/ButtonVBoxContainer"]
 margin_top = 74.0
 margin_right = 322.0
 margin_bottom = 144.0
-text = "Options"
-
-[node name="QuitButton" type="Button" parent="PauseMenuVBoxContainer/ButtonVBoxContainer"]
-margin_top = 148.0
-margin_right = 322.0
-margin_bottom = 218.0
 text = "Quit"
 
 [connection signal="pressed" from="PauseMenuVBoxContainer/ButtonVBoxContainer/ResumeButton" to="." method="_on_ResumeButton_pressed"]
