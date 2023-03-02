@@ -73,15 +73,19 @@ one_shot = true
 
 [node name="PlayerHurtStream" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
+volume_db = -15.0
 
 [node name="EnemyHurtStream" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 8 )
+volume_db = -15.0
 
 [node name="EnemyDeathStream" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = -15.0
 
 [node name="ProjectileStream" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 6 )
+volume_db = -15.0
 
 [connection signal="restart_game" from="UI/ResetOptions" to="." method="_on_ResetOptions_restart_game"]
 [connection signal="gui_input" from="UI/PauseMenu" to="." method="_on_PauseMenu_gui_input"]
